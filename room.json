@@ -1,0 +1,17 @@
+{
+    "salons": {
+      "salon1": {
+        "messages": {
+          "message1": { "username": "Alice", "content": "Bonjour" },
+          "message2": { "username": "Bob", "content": "Salut" }
+        }
+      },
+      "salon2": {
+        "messages": {
+          "message3": { "username": "Charlie", "content": "Bienvenue" },
+          "message4": { "username": "David", "content": "Hello" }
+        }
+      }
+    }
+  }
+  

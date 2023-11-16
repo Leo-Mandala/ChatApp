@@ -1,23 +1,28 @@
 <template>
   <div>
     <div
-      class="flex justify-center min-h-screen bg-rose-500"
+      class="flex justify-center min-h-screen bg-black"
       v-if="state.username === '' || state.username === null"
       :class="{'Login': state.username === '' || state.username === null}"
     >
       <form class="login-form p-4" @submit.prevent="Login">
-        <h1 class="text-gray-500 text-4xl mb-12">Connexion au chat</h1>
-        <label for="username" class="block mb-2 text-gray-500 text-lg transition duration-400">Pseudo</label>
+        <h1 class="text-white text-4xl mb-12">Connexion <span class="text-orange-500">au chat</span></h1>
+        <label
+          for="username"
+          class="block mb-2 text-white text-lg transition duration-400"
+        >
+          Pseudo
+        </label>
         <input
           type="text"
           v-model="inputUsername"
           placeholder="Entrez votre Pseudo"
-          class="appearance-none border-none outline-none bg-none block w-full p-4 rounded my-4 text-gray-700 text-xl shadow-none transition duration-400"
+          class="appearance-none border-none outline-none bg-none block w-full p-4 rounded my-4 text-black text-xl shadow-none transition duration-400"
         />
         <input
           type="submit"
           value="login"
-          class="appearance-none border-none outline-none bg-none block w-full p-4 bg-rose-500 rounded text-white text-xl font-semibold"
+          class="appearance-none border-none outline-none bg-none block w-full p-4 bg-orange-500 rounded text-black text-xl font-semibold"
         />
       </form>
     </div>
@@ -33,12 +38,12 @@
           class="absolute top-4 right-4 appearance-none border-none outline-none bg-none text-white text-xl mb-4 text-right"
           @click="Logout"
         >
-          Deconnexion 
+          Deconnexion
         </button>
         <h1 class="text-white text-4xl">Bienvenue {{ state.username }}</h1>
-      </header>
+        </header>
 
-      <section class="rounded-tl-lg rounded-tr-lg bg-white shadow-md flex-1 p-12">
+        <section class="rounded-tl-lg rounded-tr-lg bg-black shadow-md flex-1 p-12">
         <div
           v-for="message in state.messages"
           :key="message.key"
@@ -47,49 +52,71 @@
         >
           <div
             v-if="message.username === state.username"
-            class="username text-gray-500 text-lg mb-2 px-6 text-right w-full"
+            class="username text-orange-500 text-lg mb-2 px-6 text-right w-full"
           >
             {{ message.username }}
           </div>
           <div
             v-else
-            class="username text-gray-500 text-lg mb-2 px-6 w-full"
+            class="username text-orange-500 text-lg mb-2 px-6 w-full"
           >
             {{ message.username }}
           </div>
           <div
             v-if="message.username === state.username"
-            class="content-right inline-block p-4 bg-gray-200 rounded-full text-gray-700 text-xl leading-relaxed text-right"
+            class="content-right inline-block p-4 bg-orange-200 rounded-l-lg text-black text-xl leading-relaxed "
           >
             {{ message.content }}
           </div>
           <div
             v-else
-            class="content-left inline-block p-4 bg-gray-200 rounded-full text-gray-700 text-xl leading-relaxed text-left"
+            class="content-left inline-block p-4 bg-orange-500 rounded-l-lg text-black text-xl leading-relaxed text-left"
           >
             {{ message.content }}
           </div>
         </div>
       </section>
 
-      <footer class="sticky bottom-0 bg-white p-12 shadow-md">
+      <footer class="sticky bottom-0 bg-black p-12 shadow-md">
         <form @submit.prevent="SendMessage" class="flex">
           <input
             type="text"
             v-model="inputMessage"
             placeholder="Tapez votre message..."
-            class="flex-1 appearance-none border-none outline-none bg-none block w-full p-4 rounded-l text-gray-700 text-xl shadow-none transition duration-400"
+            class="flex-1 appearance-none border-none outline-none bg-orange-400 block w-full p-4 rounded-l text-black text-xl shadow-none transition duration-400"
           />
           <input
             type="submit"
             value="Envoyer"
-            class="appearance-none border-none outline-none bg-none block p-4 rounded-r bg-rose-500 text-white text-xl font-semibold"
+            class="appearance-none border-none outline-none bg-none block p-4 rounded-r bg-orange-500 text-black text-xl font-semibold"
           />
         </form>
+
+        <div class="mt-4">
+          <button
+            v-for="(salon, salonId) in salons"
+            :key="salonId"
+            @click="changeSalon(salonId)"
+            class="mr-2 px-4 py-2 bg-orange-500 text-black rounded-md"
+          >
+            {{ salonId }}
+          </button>
+        </div>
+<div class="mt-4"> <!-- //ajouter plusieurs salons a implementer plus tard -->
+  <button
+    v-for="(salon, salonId) in salons"
+    :key="salonId"
+    @click="changeSalon(salonId)"
+    class="mr-2 px-4 py-2 bg-orange-500 text-black rounded-md"
+  >
+    {{ salonId }}
+  </button>
+</div>
       </footer>
     </div>
   </div>
 </template>
+
 
 
 
